@@ -1,0 +1,10 @@
+<% @post_images.each do |post_image| %>
+<div>
+  <%= link_to post_image_path(post_image.id) do %>
+  <%= image_tag post_image.get_image %>
+  <% end %>
+  <p><%= image_tag post_image.user.get_profile_image(100,100) %></p>
+  <p>キャプション:<%= post_image.caption %></p>
+  <p>ユーザーネーム:<%= post_image.user.name %></p>
+</div>
+<% end %>
