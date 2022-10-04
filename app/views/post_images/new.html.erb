@@ -1,4 +1,14 @@
 <h1>Post Image</h1>
+
+<% if @post_image.errors.any? %>
+  <%= @post_image.errors.count %>error
+  <ul>
+    <% @post_image.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model:@post_image do |f| %>
 <%= f.file_field :image, accept: "image/*" %>
 <h4>caption</h4>
