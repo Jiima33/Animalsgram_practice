@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :post_images, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
+  has_many :active_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   has_one_attached :profile_image
   
   def get_profile_image(width,height)
@@ -16,4 +18,5 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width,height]).processed
   end
+  
 end
