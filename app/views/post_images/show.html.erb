@@ -1,5 +1,5 @@
 <div>
-  <%= image_tag @post_image.get_image %>
+  <%= image_tag @post_image.get_image, size: "200x200" %>
   <p>キャプション：<%= @post_image.caption %></p>
   <p><%= image_tag @post_image.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @post_image.user.name %></p>
