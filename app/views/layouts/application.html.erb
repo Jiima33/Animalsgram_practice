@@ -29,6 +29,7 @@
         <a class="nav-link active" aria-current="page"><%= link_to "New Post", new_post_image_path %></a>
         <a class="nav-link" ><%= link_to "Top", post_images_path %></a>
         <a class="nav-link" ><%= link_to "My Page", user_path(current_user.id) %></a>
+        <a class="nav-link" ><%= link_to "notification", notifications_path %></a>
         <a class="nav-link" > <%= link_to "Log out", destroy_user_session_path, method: :delete %></a>
     <% else %>
         <a class="nav-link" ><%= link_to "Sign in", new_user_registration_path %></a>

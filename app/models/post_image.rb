@@ -20,33 +20,19 @@ class PostImage < ApplicationRecord
     image
   end
   
-  def create_notification_by(current_user)
-    notification = current_user.active_notifications.new(
-      post_image_id: id,
-      visited_id: user_id,
-      action: "favorite"
-      )
-      notification.save if notification.valid?
-  end
-  
-  def create_notification_comment!(current_user, post_comment_id)
-    temp_ids = PostComment.select(:user_id).where(post_image_id: id).where.not(user_id: current_user.id).distinct
-    temp_ids.each do |temp_id|
-      save_notification_comment!(current_user, post_comment_id, temp_id['user_id'])
+  def create_notification_favorite(current_user)
+    notification = current_user.active_notifications.new(post_image_id: id, visited_id: user_id, action: 'favorite')
+    if notification.visiter_id == notification.visited_id
+      notification.checked = true
     end
-    save_notification_comment!(current_user, post_comment_id, user_id) if temp_ids.blank?
+    notification.save if notification.valid?
   end
   
-  def save_notification_comment!(current_user, post_comment_id, visited_id)
-    notification = current_user.active_notifications.new(
-      post_image_id: id,
-      post_comment_id: comment_id,
-      visited_id: visited_id,
-      action: 'comment'
-      )
-      if notification.visiter_id == notification.visited_id
-        notification.checked = true
-      end 
-      notification.save if notification.valid?
-  end 
-end
+  def create_notification_comment(current_user)
+    notification = current_user.active_notifications.new(post_image_id: id, visited_id: user_id, action: 'comment')
+    if notification.visiter_id == notification.visited_id
+      notification.checked = true
+    end
+    notification.save if notification.valid?
+  end
+end 

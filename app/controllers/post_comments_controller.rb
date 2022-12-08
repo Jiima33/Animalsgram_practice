@@ -1,10 +1,13 @@
 class PostCommentsController < ApplicationController
   def create
-    post_image = PostImage.find(params[:post_image_id])
-    comment = current_user.post_comments.new(post_comment_params)
-    comment.post_image_id = post_image.id
-    comment.save
-    redirect_to post_image_path(post_image)
+    @comment = Comment.new(comment_params)
+    @post_image = @comment.post_image
+    if @comment.save
+      @post_image.create_notification_comment!(current_user, @comment.id)
+      redirect_back(fallback_location: post_image_path, notice: '投稿しました')
+    else
+      redirect_back(fallback_location: post_image_path, notice: '投稿に失敗しました')
+    end
   end
   
   

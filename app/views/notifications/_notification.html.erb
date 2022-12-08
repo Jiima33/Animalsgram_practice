@@ -1,0 +1,16 @@
+<% visiter = notification.visiter %>
+<% visited = notification.visited %>
+<% post_image = notification.post_image %>
+<% action = notification.action %>
+
+
+<!--お気に入りの通知-->
+  <% if action == "favorite" %>
+    <% if visiter != visited %>
+      <li><%= link_to user_path(visiter) do %><strong><%= visiter.name.truncate(9) %><% end %></strong>さんがあなたの<strong><%= link_to post_image_path(notification.post_image_id) do %>投稿<% end %></strong>をお気に入りに登録しました。
+      <%= "(#{time_ago_in_words(notification.created_at)}前)" %></li>
+    <% else %>
+      <li><strong>自分</strong>の<strong><%= link_to post_image_path(notification.post_image_id) do %>投稿<% end %></strong>をお気に入りに登録しました。
+      <%= "(#{time_ago_in_words(notification.created_at)}前)" %></li>
+    <% end %>
+  <% end %>

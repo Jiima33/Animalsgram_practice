@@ -1,0 +1,17 @@
+
+<% if @notifications.exists? %>
+          <!--一覧一部テンプレート-->
+          <h5>
+            <%= render @notifications %>
+          </h5>
+        <% else %>
+
+          <!--パソコンの表示-->
+          <div class="mt-5 d-none d-lg-block">
+            <h3>
+              <strong>
+                通知はありません
+              </strong>
+            </h3>
+          </div>
+          <% end %>
