@@ -6,7 +6,7 @@ class PostCommentsController < ApplicationController
       @post_image.create_notification_comment!(current_user, @comment.id)
       redirect_to post_image_path(@post_image.id), notice: '投稿しました'
     else
-      render post_image_path, notice: '投稿に失敗しました'
+      render post_image_path(@post_image.id), notice: '投稿に失敗しました'
     end
   end
   

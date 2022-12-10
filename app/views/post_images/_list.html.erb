@@ -8,6 +8,9 @@
   <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
   <p>キャプション：<%= post_image.caption %></p>
   <p>ユーザーネーム：<%= post_image.user.name %></p>
+  <div id="favorite_buttons_<%= post_image.id %>">
+    <%= render "favorites/favorite", post_image: post_image %>
+  </div>
   <p><%= link_to "#{post_image.post_comments.count} comments", post_image_path(post_image.id) %></p>
 </div>
 <% end %>
