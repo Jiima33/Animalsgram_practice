@@ -7,10 +7,10 @@
   <div id="favorite_buttons_<%= @post_image.id %>">
     <%= render "favorites/favorite", post_image: @post_image %>
   </div>
-  <div id= "comment_area">
+  <div id="comment_area">
     <%= render "post_comments/comment_index", post_image: @post_image %>
   </div>
   
-  <div id= "new_comment">
+  <div id="new_comment">
     <%= render "post_comments/comment_form", post_image: @post_image, post_comment: @post_comment %>
   </div>
