@@ -10,15 +10,12 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visiter_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   has_one_attached :profile_image
+  has_many :relationships, foreign_key: "user_id", dependent: :destroy
+  has_many :followings, through: :relationships, source: :follow
+  has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
+  has_many :followers, through: :reverse_of_relationships, source: :user
   
-  # フォローをした、されたの関係
-  has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
-  
-  # 一覧画面で使う
-  has_many :followings, through: :relationships, source: :followed
-  has_many :followers, through: :reverse_of_relationships, source: :follower
-  
+
   def get_profile_image(width,height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/noimage.png')
@@ -26,18 +23,20 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width,height]).processed
   end
-    
-  # フォローしたときの処理
-  def follow(user_id)
-    relationships.create(followed_id: user_id)
+  
+  def follow(other_user)
+    unless self == other_user
+      self.relationships.find_or_create_by(follow_id: other_user.id)
+    end
   end
-  # フォローを外すときの処理
-  def unfollow(user_id)
-    relationships.find_by(followed_id: user_id).destroy
+  
+  def unfollow(other_user)
+    relationship = self.relationships.find_by(follow_id: other_user.id)
+    relationship.destroy if relationship
   end
-  # フォローしているか判定
-  def following?(user)
-    followings.include?(user)
+  
+  def following?(other_user)
+    self.followings.include?(other_user)
   end
   
 end
