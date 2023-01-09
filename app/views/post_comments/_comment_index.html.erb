@@ -11,7 +11,7 @@
       <% post_image.post_comments.each do |post_comment| %>
         <tbody>
           <tr>
-            <td style="width: 40%;">
+            <td>
               <%= image_tag post_comment.user.get_profile_image(300,300), class: "rounded-circle", :size => '100' %><br>
               [ 会員名 ]
               <%= link_to user_path(post_comment.user.id) do %>
@@ -19,12 +19,6 @@
                 <div class="d-none d-sm-block">
                   <%= post_comment.user.name %>
                 </div>
-
-                <!--コメントをした会員名(スマホの表示)-->
-                <div class="d-block d-sm-none">
-                  <%= post_comment.user.name.truncate(6) %>
-                </div>
-              <% end %>
 
             <!--コメント内容-->
 　　　　　  <td class="text-word-break">
@@ -41,23 +35,6 @@
 　　　　　  </td>
           </tr>
         </tbody>
-
-      <% end %>
-    <% else %>
-
-      <!--パソコンの表示-->
-      <h3 class="text-center mt-5 d-none d-lg-block">
-        <strong>
-          まだコメントはありません
-        </strong>
-      </h3>
-
-      <!--タブレット、スマホの表示-->
-      <h4 class="text-center mt-5 d-block d-lg-none">
-        <strong>
-          まだコメントはありません
-        </strong>
-      </h4>
-
-    <% end %>
+        <% end %>
+        <% else %>
   </table>
