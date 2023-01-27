@@ -25,16 +25,17 @@
 　　　　　    <div class="comment-text-indent">
 　　　　　      <%= post_comment.comment %>
 　　　　　    </div>
-
-　　　　　    <!--削除ボタン-->
+　　　　　    
+　　　　　   <!--削除ボタン-->
               <% if post_comment.user == current_user %>
                 <div class="row justify-content-end mr-2 mt-5 pt-5">
                   <%= link_to "削除", post_image_post_comment_path(post_comment.post_image, post_comment), method: :delete, data: {confirm: "本当に削除しますか？"}, remote: true, class: "btn destroy-btn" %>
                 </div>
               <% end %>
+              <% end %>
 　　　　　  </td>
           </tr>
         </tbody>
-        <% end %>
-        <% else %>
+      <% end %>
+    <% end %>
   </table>
