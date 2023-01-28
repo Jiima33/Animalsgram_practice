@@ -1,19 +1,21 @@
 <!-- ユーザーの投稿一覧 -->
-
-<% post_images.each do |post_image| %>
-<div>
+<div class="card mb-3">
+  <% post_images.each do |post_image| %>
+  <img class="card-img-top">
   <%= link_to post_image_path(post_image.id) do %>
-    <%= image_tag post_image.get_image, size: "100x100" %>
+    <%= image_tag post_image.get_image, size: "300x300" %>
   <% end %>
-  <p>投稿ユーザー画像：<%= image_tag post_image.user.get_profile_image(100,100) %></p>
-  <p>キャプション：<%= post_image.caption %></p>
-  <p>ユーザーネーム：<%= post_image.user.name %></p>
-  <div id="favorite_buttons_<%= post_image.id %>">
+  <div class="card-body">
+    <h5 class="card-title">キャプション：<%= post_image.caption %></h5>
+    <p class="card-text">投稿ユーザー：<%= post_image.user.name %> <%= image_tag post_image.user.get_profile_image(50,50) %></p>
+    <p class="card-text"><small class="text-muted"><%= post_image.created_at.strftime('%Y/%m/%d') %></small></p>
+    <div id="favorite_buttons_<%= post_image.id %>">
     <%= render "favorites/favorite", post_image: post_image %>
+    </div>
+    <div id="comment_count">
+      <p>コメント : <%= post_image.post_comments.count %></p>
+    </div>
   </div>
-  <div id="comment_count">
-    <%= post_image.post_comments.count %>
-  </div>
+  <% end %>
+  <%= paginate post_images %>
 </div>
-<% end %>
-<%= paginate post_images %>

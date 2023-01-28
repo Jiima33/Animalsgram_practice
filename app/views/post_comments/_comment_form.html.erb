@@ -1,7 +1,7 @@
 <div id="comments_error">
   <%= render 'layouts/errors', model: @comment %>
 </div>
-<%= form_with model: [@post_image, @comment], local: false do |f| %>
-  <%= f.text_area :comment, placeholder: "コメントを記入して下さい　※100文字以内", size: "125x6", class: "col-12 form-all shadow" %>
-  <%= f.submit "送信", class: "btn post-btn mt-1 mb-4 shadow" %>
+<%= form_with(model:[post_image, comment], remote: true) do |f| %>
+  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
+  <%= f.submit "送信する" %>
 <% end %>

@@ -1,9 +1,10 @@
-<div>
-  <%= image_tag @post_image.get_image, size: "200x200" %>
-  <p>キャプション：<%= @post_image.caption %></p>
-  <p><%= image_tag @post_image.user.get_profile_image(100,100) %></p>
-  <p>ユーザーネーム：<%= @post_image.user.name %></p>
-  <p>投稿日時：<%= @post_image.created_at.strftime('%Y/%m/%d') %></p>
+<div class="container">
+  <%= image_tag @post_image.get_image, size: "300x300" %>
+    <p>キャプション：<%= @post_image.caption %></p>
+    <p><%= image_tag @post_image.user.get_profile_image(100,100) %></p>
+    <p>ユーザーネーム：<%= @post_image.user.name %></p>
+    <p>投稿日時：<%= @post_image.created_at.strftime('%Y/%m/%d') %></p>
+  
   <div id="favorite_buttons_<%= @post_image.id %>">
     <%= render "favorites/favorite", post_image: @post_image %>
   </div>
@@ -14,6 +15,8 @@
     <%= render "post_comments/comment_index", post_image: @post_image %>
   </div>
   
-  <div id="new_comment">
-    <%= render "post_comments/comment_form", post_image: @post_image, post_comment: @post_comment %>
+    <div id="comments-area">
+      <%= render "post_comments/comment",post_image: @post_image,comment: @comment %>
+    </div>
   </div>
+</div>
