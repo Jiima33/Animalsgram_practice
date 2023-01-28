@@ -1,10 +1,8 @@
+<!--エラーメッセージ-->
 <% if model.errors.any? %>
-  <div id="error_explanation">
-    <h3>
-      <%= pluralize(obj.errors.count, "error") %> prohibited this model from being saved:
-    </h3>
-
-    <ul>
+  <div class="alert alert-danger">
+    <ul class="list-unstyled">
+      <h5><%= model.errors.count %>件のエラー</h5>
       <% model.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

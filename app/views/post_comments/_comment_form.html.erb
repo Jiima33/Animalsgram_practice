@@ -1,7 +1,0 @@
-<div id="comments_error">
-  <%= render 'layouts/errors', model: @comment %>
-</div>
-<%= form_with(model:[post_image, comment], remote: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに",class:"form-control" %>
-  <%= f.submit "送信する" %>
-<% end %>

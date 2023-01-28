@@ -10,13 +10,14 @@
   </div>
   
   <%= render 'relationships/follow_button', user: @user %>
-  
-  <div id="comment_area">
-    <%= render "post_comments/comment_index", post_image: @post_image %>
+
+  <!--部分テンプレート化-->
+  <!--コメントフォーム-->
+  <div class="new-comment">
+    <%= render 'post_comments/form', post_image: @post_image, post_comment: @post_comment %>
   </div>
-  
-    <div id="comments-area">
-      <%= render "post_comments/comment",post_image: @post_image,comment: @comment %>
-    </div>
+  <!--コメント一覧部分-->
+  <!--divタグのclassをid="comments_area"に変更-->
+  <div id="comments_area"> 
+    <%= render 'post_comments/post_comments', post_image: @post_image %>
   </div>
-</div>
