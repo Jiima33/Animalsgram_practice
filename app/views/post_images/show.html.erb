@@ -11,13 +11,16 @@
   
   <%= render 'relationships/follow_button', user: @user %>
 
-  <!--部分テンプレート化-->
-  <!--コメントフォーム-->
-  <div class="new-comment">
-    <%= render 'post_comments/form', post_image: @post_image, post_comment: @post_comment %>
-  </div>
-  <!--コメント一覧部分-->
-  <!--divタグのclassをid="comments_area"に変更-->
-  <div id="comments_area"> 
-    <%= render 'post_comments/post_comments', post_image: @post_image %>
-  </div>
+<h2>コメントする</h2>
+
+<%= form_with(model:[@post_image, @comment], method: :post) do |f| %>
+  <%= f.text_area :comment %>
+  <%= f.hidden_field :post_image_id, value: @post_image.id %>
+  <%= f.submit 'コメントする' %>
+<% end %>
+
+<h2>コメント一覧</h2>
+
+<% @comments.each do |post_comment| %>
+  <%= post_comment.comment %>
+<% end %>

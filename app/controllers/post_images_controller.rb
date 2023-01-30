@@ -19,7 +19,8 @@ class PostImagesController < ApplicationController
   
   def show
     @post_image = PostImage.find(params[:id])
-    @post_comment = PostComment.new
+    @comments = @post_image.post_comments  #投稿詳細に関連付けてあるコメントを全取得
+    @comment = current_user.post_comments.new  #投稿詳細画面でコメントの投稿を行うので、formのパラメータ用にCommentオブジェクトを取得
     @user = User.find(params[:id])
   end
   
