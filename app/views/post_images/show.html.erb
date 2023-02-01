@@ -9,7 +9,9 @@
     <%= render "favorites/favorite", post_image: @post_image %>
   </div>
   
-  <%= render 'relationships/follow_button', user: @user %>
+  <div class="follow">
+    <%= render 'relationships/follow_button', user: @user %>
+  </div>
 
 <h2>コメントする</h2>
 

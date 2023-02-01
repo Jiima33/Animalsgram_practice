@@ -6,6 +6,7 @@
   <%= link_to "Profile Edit", edit_user_path(@user) %>
   <% end %>
   
+  
   follows<%= link_to @user.followings.count, user_followings_path(@user) %>
   follower<%= link_to @user.followers.count, user_followers_path(@user) %>
 </div>
