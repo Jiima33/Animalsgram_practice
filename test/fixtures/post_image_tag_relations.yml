@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  postImage: one
+  tag: one
+
+two:
+  postImage: two
+  tag: two

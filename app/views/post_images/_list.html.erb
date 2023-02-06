@@ -9,6 +9,9 @@
     <h5 class="card-title">キャプション：<%= post_image.caption %></h5>
     <p class="card-text">投稿ユーザー：<%= post_image.user.name %> <%= image_tag post_image.user.get_profile_image(50,50) %></p>
     <p class="card-text"><small class="text-muted"><%= post_image.created_at.strftime('%Y/%m/%d') %></small></p>
+    <% post_image.tags.each do |tag| %>
+      <span><%= tag.name %></span>
+    <% end %>
     <div id="favorite_buttons_<%= post_image.id %>">
     <%= render "favorites/favorite", post_image: post_image %>
     </div>

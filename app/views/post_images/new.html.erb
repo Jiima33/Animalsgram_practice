@@ -13,5 +13,15 @@
 <%= f.file_field :image, accept: "image/*" %>
 <h4>caption</h4>
 <%= f.text_area :caption %>
+<div class='form-group'>
+  <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <div class='form-check'>
+      <%= tag.label class: 'form-check-label' do %>
+      <%= tag.check_box class: 'form-check-input' %>
+      <%= tag.text %>
+   <% end %>
+  </div>
+  <% end %>
+  </div>
 <%= f.submit 'Share' %>
 <% end %>

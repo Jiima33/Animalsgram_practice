@@ -4,6 +4,8 @@ class PostImage < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :notifications, dependent: :destroy
+  has_many :PostImage_tag_relations, dependent: :destroy
+  has_many :tags, through: :PostImage_tag_relations, dependent: :destroy
   
   validates :image, presence: true
   
